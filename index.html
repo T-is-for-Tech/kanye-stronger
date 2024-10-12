@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanye West (Stronger) / Daft Punk Sample Soundboard</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+        margin: 0;
+    }
+    .soundboard {
+        display: grid;
+        grid-template-columns: repeat(2, 150px);
+        gap: 10px;
+    }
+    .sound-button {
+        padding: 20px;
+        font-size: 18px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .sound-button:nth-child(1), .sound-button:nth-child(2) { background-color: #ff66cc; }
+    .sound-button:nth-child(3), .sound-button:nth-child(4) { background-color: #3366ff; }
+    .sound-button:nth-child(5), .sound-button:nth-child(6) { background-color: #3399ff; }
+    .sound-button:nth-child(7), .sound-button:nth-child(8) { background-color: #33cc33; }
+    .sound-button:nth-child(9), .sound-button:nth-child(10) { background-color: #ffcc00; }
+    .sound-button:nth-child(11), .sound-button:nth-child(12) { background-color: #ff9933; }
+    .sound-button:nth-child(13), .sound-button:nth-child(14) { background-color: #ff3300; }
+    .sound-button:nth-child(15), .sound-button:nth-child(16) { background-color: #cc0000; }
+    .sound-button.play-drums { background-color: #ff0066; grid-column: span 2; }
+    .sound-button:hover {
+        opacity: 0.8;
+    }
+    .video-link {
+        grid-column: span 2;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .video-link a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+    .video-link a:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+    }
+    </style>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="soundboard">
+        <button class="sound-button" data-sound="work-it">Work It</button>
+        <button class="sound-button" data-sound="make-it">Make It</button>
+        <button class="sound-button" data-sound="do-it">Do It</button>
+        <button class="sound-button" data-sound="makes-us">Makes Us</button>
+        <button class="sound-button" data-sound="harder">Harder</button>
+        <button class="sound-button" data-sound="better">Better</button>
+        <button class="sound-button" data-sound="faster">Faster</button>
+        <button class="sound-button" data-sound="stronger">Stronger</button>
+        <button class="sound-button" data-sound="more-than">More Than</button>
+        <button class="sound-button" data-sound="hour">Hour</button>
+        <button class="sound-button" data-sound="our">Our</button>
+        <button class="sound-button" data-sound="never">Never</button>
+        <button class="sound-button" data-sound="ever">Ever</button>
+        <button class="sound-button" data-sound="after">After</button>
+        <button class="sound-button" data-sound="work-is">Work Is</button>
+        <button class="sound-button" data-sound="over">Over</button>
+        <button class="sound-button play-drums" data-sound="drums"><i class="fas fa-play"></i> Play Drums</button>
+        <div class="video-link">
+            <a href="https://www.youtube.com/watch?v=PsO6ZnUZI0g" target="_blank">Kanye West (Stronger) - YouTube</a>
+        </div>
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const sounds = [
+            'work-it', 'make-it', 'do-it', 'makes-us',
+            'harder', 'better', 'faster', 'stronger',
+            'more-than', 'hour', 'our', 'never',
+            'ever', 'after', 'work-is', 'over', 'drums'
+        ];
+
+        const audioElements = {};
+
+        // Preload audio files with mp3 extension
+        sounds.forEach(sound => {
+            const audio = new Audio(`sounds_v2/${sound}.mp3`);
+            audio.load();
+            audioElements[sound] = audio;
+        });
+
+        const buttons = document.querySelectorAll('.sound-button');
+
+        buttons.forEach(button => {
+            const playSound = () => {
+                event.preventDefault(); // Prevent default behavior like scrolling
+                const soundName = button.getAttribute('data-sound');
+                const audio = audioElements[soundName];
+
+                if (soundName === 'drums') {
+                    if (audio.paused) {
+                        audio.currentTime = 0; // Reset to start
+                        audio.play();
+                        button.innerHTML = '<i class="fas fa-stop"></i> Stop Drums';
+                    } else {
+                        audio.pause();
+                        button.innerHTML = '<i class="fas fa-play"></i> Play Drums';
+                    }
+                } else {
+                    audio.currentTime = 0; // Reset to start
+                    audio.play();
+                }
+            };
+
+            // Add event listeners for both desktop and mobile
+            button.addEventListener('pointerdown', playSound);
+        });
+    });
+    </script>
+</body>
+</html>
